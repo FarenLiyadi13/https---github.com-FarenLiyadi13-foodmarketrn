@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     paddingVertical: 8,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     alignItems: 'center',
   },
   image: {

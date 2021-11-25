@@ -10,6 +10,10 @@ import {
   Home,
   Order,
   Profile,
+  FoodDetail,
+  OrderDetail,
+  OrderSummary,
+  SuccessOrder,
 } from '../pages';
 import {BottomNavigator} from '../components';
 const Stack = createNativeStackNavigator();
@@ -56,6 +60,26 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FoodDetail"
+        component={FoodDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OrderDetail"
+        component={OrderDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OrderSummary"
+        component={OrderSummary}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SuccessOrder"
+        component={SuccessOrder}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

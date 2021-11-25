@@ -1,8 +1,21 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Header, TextInput, Button, Gap} from '../../components';
+import {useForm} from '../../utils';
+import Axios from 'axios';
 
 const SignIn = ({navigation}) => {
+  const [form, setForm] = useForm({email: '', password: ''});
+  const onSubmit = () => {
+    console.log(form);
+    Axios.post('http://foodmarket.ladder.my.id/api/login', form)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
     <View style={{flex: 1}}>
       <Header title="Sign In" subTitle="Find your ever best  meal" />
@@ -10,13 +23,19 @@ const SignIn = ({navigation}) => {
         <TextInput
           label="Email Address"
           placeholder="Type your email address"
-          onChangeText={() => {}}
+          value={form.email}
+          onChangeText={value => {
+            setForm('email', value);
+          }}
         />
         <Gap height={16} />
         <TextInput
           label="Password"
           placeholder="Type your password"
-          onChangeText={() => {}}
+          value={form.password}
+          onChangeText={value => {
+            setForm('password', value);
+          }}
           secureTextEntry
         />
         <Gap height={24} />
@@ -24,7 +43,9 @@ const SignIn = ({navigation}) => {
           text="Sign In"
           color="#ffc700"
           textColor="#020202"
-          onPress={() => {}}
+          onPress={() => {
+            onSubmit();
+          }}
         />
         <Gap height={12} />
         <Button
