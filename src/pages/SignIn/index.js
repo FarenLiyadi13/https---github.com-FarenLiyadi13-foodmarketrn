@@ -1,20 +1,18 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Header, TextInput, Button, Gap} from '../../components';
-import {useForm} from '../../utils';
-import Axios from 'axios';
+import {getData, useForm} from '../../utils';
+import {useDispatch} from 'react-redux';
+import {signInAction} from '../../redux/action/auth';
 
 const SignIn = ({navigation}) => {
   const [form, setForm] = useForm({email: '', password: ''});
+
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
     console.log(form);
-    Axios.post('http://foodmarket.ladder.my.id/api/login', form)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    dispatch(signInAction(form, navigation));
   };
   return (
     <View style={{flex: 1}}>

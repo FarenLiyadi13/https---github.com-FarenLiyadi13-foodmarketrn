@@ -1,8 +1,32 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import {Header, TextInput, Gap, Button, Select} from '../../components';
+import {useForm} from '../../utils';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {setLoading, signUpAction} from '../../redux/action';
 
 const SignUpAddress = ({navigation}) => {
+  // set custom hooks
+  const [form, setForm] = useForm({
+    phoneNumber: '',
+    address: '',
+    houseNumber: '',
+    city: 'Makassar',
+  });
+
+  const dispatch = useDispatch();
+  const {registerReducer, photoReducer} = useSelector(state => state);
+  const onSubmit = () => {
+    const data = {...form, ...registerReducer};
+    console.log(data);
+    console.log('ini photo reducer yang di sign up address ', photoReducer);
+    dispatch(setLoading(true));
+    dispatch(signUpAction(data, photoReducer, navigation));
+
+    // navigation.navigate('SuccessSignUp');
+  };
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={{flex: 1}}>
@@ -17,29 +41,44 @@ const SignUpAddress = ({navigation}) => {
           <TextInput
             label="Phone No"
             placeholder="Type your phone number"
-            onChangeText={() => {}}
+            value={form.phoneNumber}
+            onChangeText={value => {
+              setForm('phoneNumber', value);
+            }}
           />
           <Gap height={16} />
           <TextInput
             label="Address"
             placeholder="Type your address"
-            onChangeText={() => {}}
+            value={form.address}
+            onChangeText={value => {
+              setForm('address', value);
+            }}
           />
           <Gap height={16} />
           <TextInput
             label="House Number"
             placeholder="Your House Number"
-            onChangeText={() => {}}
+            value={form.houseNumber}
+            onChangeText={value => {
+              setForm('houseNumber', value);
+            }}
           />
           <Gap height={16} />
-          <Select label="City" />
+          <Select
+            label="City"
+            value={form.city}
+            onSelectChange={value => {
+              setForm('city', value);
+            }}
+          />
           <Gap height={24} />
           <Button
             text="Sign Up Now"
             color="#FFC700"
             textColor="#020202"
             onPress={() => {
-              navigation.navigate('SuccessSignUp');
+              onSubmit();
             }}
           />
         </View>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../assets';
 import {FoodCard, HomeProfile, HomeTabSection} from '../../components';

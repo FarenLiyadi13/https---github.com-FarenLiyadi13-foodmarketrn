@@ -11,6 +11,7 @@ import Counter from './Counter';
 import ItemValue from './ItemValue';
 import ItemListMenu from './ItemListMenu';
 import ProfileTabSection from './ProfileTabSection';
+import Loading from './Loading';
 export {
   Header,
   BottomNavigator,
@@ -25,4 +26,5 @@ export {
   ItemValue,
   ProfileTabSection,
   ItemListMenu,
+  Loading,
 };
